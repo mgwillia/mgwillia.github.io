@@ -63,17 +63,17 @@
                         </a>
                     </li>
                     <li>
-                        <a href="https://scholar.google.com/citations?user=DJRhPVgAAAAJ&hl=en">
+                        <a href="https://mcogswell.io/">
                             Michael Cogswell<sup>2</sup>
                         </a>
                     </li>
                     <li>
-                        <a href="https://newundergrad-lb.cs.umd.edu/people/namithap">
+                        <a href="https://scholar.google.com/citations?user=5tD6LNEAAAAJ&hl=en">
                             Meng Ye<sup>2</sup>
                         </a>
                     </li>
                     <li>
-                        <a href="https://archana1998.github.io/">
+                        <a href="https://www.ksikka.com/">
                             Karan Sikka<sup>2</sup>
                         </a>
                     </li>
@@ -83,7 +83,7 @@
                         </a>
                     </li>
                     <li>
-                        <a href="https://tianyizhou.github.io/">
+                        <a href="https://sites.google.com/view/ajaydivakaran/home">
                             Ajay Divakaran<sup>2</sup>
                         </a>
                     </li>
@@ -147,119 +147,63 @@
             </div>
         </div>
 
-
-
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
                 <h3>
-                    Overview
                 </h3>
                 <center>
                     <image src="imgs/diffssl_teaser.png" width="720px"></image>
                 </center> <br>
                 <p class="text-justify">
-                    We answer the titular question with an emphatic "yes" -- text-free diffusion models learn highly useful, 
-                    discriminative visual representations.
-                    Building upon recent works which explore the utility of diffusion for zero-shot tasks, segmentation, or 
-                    classification with tiny image datasets such as CIFAR, we perform a comprehensive benchmark using 
-                    popular classification, detection, and segmentation datasets to demonstrate the promising potential of
-                    text-free diffusion models for these tasks.
-                    We furthermore develop and propose sophisticated, flexible mechanisms for ideally using diffusion features,
-                    that is, DifFormer (attention-based feature fusion) and DifFeed (feedback-based feature fusion).
-                    With compelling results, we suggest diffusion models can be an unsupervised, unified representation model, 
-                    which learns weights that generate good features for both generative and discriminative tasks, all from a single
-                    pretraining task and with a single set of weights.
                 </p>
 
                 <h3>
-                    Inputs need some noise.
                 </h3>
                 <center>
                     <image src="imgs/hypothesis_plot.png" width="720px"></image>
                 </center> <br>
                 <p class="text-justify">
-                    While for standard models, adding noise is an "attack" that will cause performance to degrade, we find 
-                    that diffusion models actually need some noise in order to perform properly, a phenomenon which we 
-                    illustrate with the plot above.
-                    We hypothesize that this is because it is important the denoising task isn't too easy.
-                    However, there must be a balance. 
-                    For later noise steps, performance declines because the input itself becomes unrecognizable.
                 </p>
 
                 <h3>
-                    Features are complimentary.
                 </h3>
                 <center>
                     <image src="imgs/cka.png" width="720px"></image>
                 </center> <br>
                 <p class="text-justify">
-                    We show a comparison between features between guided diffusion and an MAE-pretrained ViT-B, plotting 
-                    their similarity in terms of centered kernel alignment (CKA).
-                    We notice that many different diffusion blocks have features that have significant similarities to the most 
-                    discriminative layers of the ViT (the later layers).
-                    We also find that the featuers from different diffusion blocks and noise time steps are themselves quite 
-                    unique from each other.
-                    Thus, we suggest that to unlock the power of the diffusion network as a visual representation learner, 
-                    leveraging these diverse features in concert with each other is essential. 
                 </p>
 
                 <h3>
-                    How should features be combined?
                 </h3>
                 <center>
                     <image src="imgs/methods_diffssl.png" width="720px"></image>
                 </center> <br>
                 <p class="text-justify">
-                    The first issue we tackle is pooling. 
-                    Diffusion feature maps can be large, and for some tasks (e.g. fine-grained visual categorization), 
-                    naively selecting a small pooling size can be detrimental to the performance.
-                    So, we propose an attention head to act as a learned pooling mechanism.
-                    Also, as we note above, features tend to be quite complimentary, so we propose combining these features 
-                    across both blocks and time using our attention head.
-                    We refer to this mechanism, powered by the unique diversity of diffusion features, as DifFormer.
-                    We note that this requires many forward passes in order to fuse across time. 
-                    As a more efficient alternative, we match and even sometimes exceed the performance without the need to 
-                    fuse across time by leveraging feedback.
-                    Feedback works very well due to the UNet shape of the model, and the compatibly of corresonding encoder and decoder 
-                    blocks (demonstrated by the X-shape in the CKA figure).
-                    We name this approach DifFeed.
                 </p>
 
                 <h3>
-                    Diffusion models beat GANs (and some other models too) for image classification.
                 </h3>
                 <center>
                     <image src="imgs/lin_probe_table.png" width="360px"></image>
                 </center> <br>
                 <p class="text-justify">
-                    To borrow from the title of one of the most popular papers in the area, we find that "diffusion models 
-                    beat GANs for image [classification]," not just synthesis.
-                    We also find that our DifFormer and DifFeed help them compete even with models like MAGE that leverage
-                    state-of-the-art pretrained image features (VQ-GAN tokens) and were pretrained with both tasks in mind. 
-                    We believe that if diffusion models perform this well out of the box, it is very worthwhile to pursue more 
-                    tailored modifications to unlock their potential for unified representation learning.
                 </p>
 
                 <h3>
-                    Diffusion models do well on fine-grained visual categorization (FGVC), too.
                 </h3>
                 <center>
                     <image src="imgs/fgvc.png" width="720px"></image>
                 </center> <br>
                 <p class="text-justify">
-                    Compared to other SOTA unsupervised representation learning methods, diffusion models perform very well 
-                    in this transfer learning setting.
                 </p>
 
                 <h3>
-                    And object detection.
                 </h3>
                 <center>
                     <image src="imgs/detection.png" width="720px"></image>
                 </center> <br>
 
                 <h3>
-                    Also for semantic segmentation!
                 </h3>
                 <center>
                     <image src="imgs/semantic_seg_table.png" width="360px"></image>
@@ -276,14 +220,7 @@
                 </h3>
                 <div class="form-group col-md-10 col-md-offset-1">
                     <textarea id="bibtex" class="form-control" readonly rows="8">
-@misc{mukhopadhyay2023textfree,
-    title={Do text-free diffusion models learn discriminative visual representations?}, 
-    author={Soumik Mukhopadhyay and Matthew Gwilliam and Yosuke Yamaguchi and Vatsal Agarwal and Namitha Padmanabhan and Archana Swaminathan and Tianyi Zhou and Abhinav Shrivastava},
-    year={2023},
-    eprint={2311.17921},
-    archivePrefix={arXiv},
-    primaryClass={cs.CV}
-}
+TBD
                     </textarea>
                 </div>
             </div>

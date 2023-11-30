@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html>
+<style>
+    p {
+        font-size: 15px;
+    }
+</style>
+
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+
+    <title>Diffusion for Recognition</title>
+
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1.">
+
+
+    <!--     <link rel="apple-touch-icon" href="apple-touch-icon.png"> -->
+    <link rel="icon" type="image/png" href="img/seal_icon.png">
+    <!-- Place favicon.ico in the root directory -->
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.8.0/codemirror.min.css">
+    <link rel="stylesheet" href="css/app.css">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-110862391-1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'UA-110862391-1');
+    </script>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.8.0/codemirror.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.5.3/clipboard.min.js"></script>
+
+    <script src="js/app.js"></script>
+</head>
+
+<body>
+    <div class="container" id="main">
+        <div class="row">
+            <h2 class="col-md-12 text-center">
+                A Video is Worth 10,000 Words: Training and Benchmarking with Diverse Captions for Better Long Video Retrieval<br />
+                <small>
+                    Submission Under Review
+                </small>
+            </h2>
+        </div>
+        <div class="row">
+            <div class="col-md-12 text-center">
+                <ul class="list-inline">
+                    <li>
+                        <a href="https://mgwillia.github.io">
+                            Matt Gwilliam*<sup>1</sup>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://scholar.google.com/citations?user=DJRhPVgAAAAJ&hl=en">
+                            Michael Cogswell<sup>2</sup>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://newundergrad-lb.cs.umd.edu/people/namithap">
+                            Meng Ye<sup>2</sup>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://archana1998.github.io/">
+                            Karan Sikka<sup>2</sup>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="http://www.cs.umd.edu/~abhinav/">
+                            Abhinav Shrivastava<sup>1</sup>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://tianyizhou.github.io/">
+                            Ajay Divakaran<sup>2</sup>
+                        </a>
+                    </li>
+                </ul>
+                <ul class="list-inline">
+                    <li>
+                        <sup>1</sup>University of Maryland, College Park 
+                    </li>
+                    <li>
+                        <sup>2</sup>SRI Internationl
+                    </li>
+                </ul>
+                <!--University of Maryland, College Park -->
+            </div>
+        </div>
+
+
+        <div class="row">
+            <div class="col-md-4 col-md-offset-4 text-center">
+                <ul class="nav nav-pills nav-justified">
+                    <li>
+                        <a href="https://mgwillia.github.io/diffssl/">
+                            <h4><strong>Paper</strong></h4>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://mgwillia.github.io/diffssl/">
+                            <h4><strong>Data</strong></h4>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+                <h3>
+                    Abstract
+                </h3>
+                <p class="text-justify">
+                    Existing long video retrieval systems are trained and tested in the paragraph-to-video retrieval regime, 
+                    where every long video is described by a single long paragraph. 
+                    This neglects the richness and variety of 
+                    possible valid descriptions of a video, which could be described in moment-by-moment detail, or in a single 
+                    phrase summary, or anything in between. 
+                    To provide a more thorough evaluation of the capabilities of long 
+                    video retrieval systems, we propose a pipeline that leverages state-of-the-art large language models to 
+                    carefully generate a diverse set of synthetic captions for long videos. 
+                    We validate this pipeline's 
+                    fidelity via rigorous human inspection. We then benchmark a representative set of video language models 
+                    on these synthetic captions using a few long video datasets, showing that they struggle with the transformed 
+                    data, especially the shortest captions. 
+                    We also propose a lightweight fine-tuning method, where we use a 
+                    contrastive loss to learn a hierarchical embedding loss based on the differing levels of information among 
+                    the various captions. 
+                    Our method improves performance both on the downstream paragraph-to-video retrieval 
+                    task (+1.1% R@1 on ActivityNet), as well as for the various long video retrieval metrics we 
+                    compute using our synthetic data (+3.6% R@1 for short descriptions on ActivityNet).
+                </p>
+            </div>
+        </div>
+
+
+
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+                <h3>
+                    Overview
+                </h3>
+                <center>
+                    <image src="imgs/diffssl_teaser.png" width="720px"></image>
+                </center> <br>
+                <p class="text-justify">
+                    We answer the titular question with an emphatic "yes" -- text-free diffusion models learn highly useful, 
+                    discriminative visual representations.
+                    Building upon recent works which explore the utility of diffusion for zero-shot tasks, segmentation, or 
+                    classification with tiny image datasets such as CIFAR, we perform a comprehensive benchmark using 
+                    popular classification, detection, and segmentation datasets to demonstrate the promising potential of
+                    text-free diffusion models for these tasks.
+                    We furthermore develop and propose sophisticated, flexible mechanisms for ideally using diffusion features,
+                    that is, DifFormer (attention-based feature fusion) and DifFeed (feedback-based feature fusion).
+                    With compelling results, we suggest diffusion models can be an unsupervised, unified representation model, 
+                    which learns weights that generate good features for both generative and discriminative tasks, all from a single
+                    pretraining task and with a single set of weights.
+                </p>
+
+                <h3>
+                    Inputs need some noise.
+                </h3>
+                <center>
+                    <image src="imgs/hypothesis_plot.png" width="720px"></image>
+                </center> <br>
+                <p class="text-justify">
+                    While for standard models, adding noise is an "attack" that will cause performance to degrade, we find 
+                    that diffusion models actually need some noise in order to perform properly, a phenomenon which we 
+                    illustrate with the plot above.
+                    We hypothesize that this is because it is important the denoising task isn't too easy.
+                    However, there must be a balance. 
+                    For later noise steps, performance declines because the input itself becomes unrecognizable.
+                </p>
+
+                <h3>
+                    Features are complimentary.
+                </h3>
+                <center>
+                    <image src="imgs/cka.png" width="720px"></image>
+                </center> <br>
+                <p class="text-justify">
+                    We show a comparison between features between guided diffusion and an MAE-pretrained ViT-B, plotting 
+                    their similarity in terms of centered kernel alignment (CKA).
+                    We notice that many different diffusion blocks have features that have significant similarities to the most 
+                    discriminative layers of the ViT (the later layers).
+                    We also find that the featuers from different diffusion blocks and noise time steps are themselves quite 
+                    unique from each other.
+                    Thus, we suggest that to unlock the power of the diffusion network as a visual representation learner, 
+                    leveraging these diverse features in concert with each other is essential. 
+                </p>
+
+                <h3>
+                    How should features be combined?
+                </h3>
+                <center>
+                    <image src="imgs/methods_diffssl.png" width="720px"></image>
+                </center> <br>
+                <p class="text-justify">
+                    The first issue we tackle is pooling. 
+                    Diffusion feature maps can be large, and for some tasks (e.g. fine-grained visual categorization), 
+                    naively selecting a small pooling size can be detrimental to the performance.
+                    So, we propose an attention head to act as a learned pooling mechanism.
+                    Also, as we note above, features tend to be quite complimentary, so we propose combining these features 
+                    across both blocks and time using our attention head.
+                    We refer to this mechanism, powered by the unique diversity of diffusion features, as DifFormer.
+                    We note that this requires many forward passes in order to fuse across time. 
+                    As a more efficient alternative, we match and even sometimes exceed the performance without the need to 
+                    fuse across time by leveraging feedback.
+                    Feedback works very well due to the UNet shape of the model, and the compatibly of corresonding encoder and decoder 
+                    blocks (demonstrated by the X-shape in the CKA figure).
+                    We name this approach DifFeed.
+                </p>
+
+                <h3>
+                    Diffusion models beat GANs (and some other models too) for image classification.
+                </h3>
+                <center>
+                    <image src="imgs/lin_probe_table.png" width="360px"></image>
+                </center> <br>
+                <p class="text-justify">
+                    To borrow from the title of one of the most popular papers in the area, we find that "diffusion models 
+                    beat GANs for image [classification]," not just synthesis.
+                    We also find that our DifFormer and DifFeed help them compete even with models like MAGE that leverage
+                    state-of-the-art pretrained image features (VQ-GAN tokens) and were pretrained with both tasks in mind. 
+                    We believe that if diffusion models perform this well out of the box, it is very worthwhile to pursue more 
+                    tailored modifications to unlock their potential for unified representation learning.
+                </p>
+
+                <h3>
+                    Diffusion models do well on fine-grained visual categorization (FGVC), too.
+                </h3>
+                <center>
+                    <image src="imgs/fgvc.png" width="720px"></image>
+                </center> <br>
+                <p class="text-justify">
+                    Compared to other SOTA unsupervised representation learning methods, diffusion models perform very well 
+                    in this transfer learning setting.
+                </p>
+
+                <h3>
+                    And object detection.
+                </h3>
+                <center>
+                    <image src="imgs/detection.png" width="720px"></image>
+                </center> <br>
+
+                <h3>
+                    Also for semantic segmentation!
+                </h3>
+                <center>
+                    <image src="imgs/semantic_seg_table.png" width="360px"></image>
+                </center> <br>
+
+            </div>
+        </div>
+
+
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+                <h3>
+                    Citation
+                </h3>
+                <div class="form-group col-md-10 col-md-offset-1">
+                    <textarea id="bibtex" class="form-control" readonly rows="8">
+@misc{mukhopadhyay2023textfree,
+    title={Do text-free diffusion models learn discriminative visual representations?}, 
+    author={Soumik Mukhopadhyay and Matthew Gwilliam and Yosuke Yamaguchi and Vatsal Agarwal and Namitha Padmanabhan and Archana Swaminathan and Tianyi Zhou and Abhinav Shrivastava},
+    year={2023},
+    eprint={2311.17921},
+    archivePrefix={arXiv},
+    primaryClass={cs.CV}
+}
+                    </textarea>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+                <br> The website was based on the popular template from <a href="https://bmild.github.io">Ben
+                    Mildenhall</a>.
+                </p>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

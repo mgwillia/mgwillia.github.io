@@ -150,64 +150,62 @@
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
                 <h3>
+                    Overview
                 </h3>
                 <center>
-                    <image src="imgs/diffssl_teaser.png" width="720px"></image>
+                    <image src="imgs/10k_teaser.png" width="360px"></image>
                 </center> <br>
                 <p class="text-justify">
+                    We find that existing long video retrieval datasets are arbitrarily constrained in terms of their text descriptions.
+                    They use paragraph-length captions, which are often generated as highly literal descriptions of video content.
+                    This neglects the richness of potential captions, especially shorter, abstract summaries.
                 </p>
 
                 <h3>
+                    New Synthetic 10k Words Data
                 </h3>
                 <center>
-                    <image src="imgs/hypothesis_plot.png" width="720px"></image>
+                    <image src="imgs/10k_data.png" width="720px"></image>
                 </center> <br>
                 <p class="text-justify">
+                    We develop a novel synthetic data generation pipeline, leveraging ChatGPT with GPT-3.5.
+                    With our pipeline, we generate 10k Words supplements for 3 long video retrieval datasets: ActivityNet, QuerYD, and LF-VILA.
+                    In the table above, we give an example of these synthetic captions.
+                    You can download all 3 supplements from the link at the top of this page.
                 </p>
 
                 <h3>
+                    SOTA Models Struggle with 10k Words Problem
                 </h3>
                 <center>
-                    <image src="imgs/cka.png" width="720px"></image>
+                    <image src="imgs/zero_shot_deltas.png" width="720px"></image>
                 </center> <br>
                 <p class="text-justify">
+                    We find that in the zero-shot setting, a representative set of video-language models struggle with the 10k Words data for video retrieval.
+                    They especially struggle with the shortest summaries.
                 </p>
 
                 <h3>
+                    Novel Finetuning for 10k Words Problem
                 </h3>
                 <center>
-                    <image src="imgs/methods_diffssl.png" width="720px"></image>
+                    <image src="imgs/10k_methods.png" width="720px"></image>
                 </center> <br>
                 <p class="text-justify">
+                    We propose a novel finetuning strategy to improve performance for video retrieval, espeically the shorter summaries introduced by 10k.
+                    At the core of this, we sample 10k Words data during training.
+                    Additionally, we propose 2 losses to align a project of 10k text features with video and paragraph text features.
                 </p>
 
                 <h3>
+                    Results
                 </h3>
                 <center>
-                    <image src="imgs/lin_probe_table.png" width="360px"></image>
+                    <image src="imgs/10k_main_table.png" width="720px"></image>
                 </center> <br>
                 <p class="text-justify">
+                    With our finetuning (applied to COSA), we achieve impressive improvements over zero-shot results compared to standard finetuning and standard finetuning with 10k Words data.
                 </p>
-
-                <h3>
-                </h3>
-                <center>
-                    <image src="imgs/fgvc.png" width="720px"></image>
-                </center> <br>
-                <p class="text-justify">
-                </p>
-
-                <h3>
-                </h3>
-                <center>
-                    <image src="imgs/detection.png" width="720px"></image>
-                </center> <br>
-
-                <h3>
-                </h3>
-                <center>
-                    <image src="imgs/semantic_seg_table.png" width="360px"></image>
-                </center> <br>
 
             </div>
         </div>

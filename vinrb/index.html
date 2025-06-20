@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html>
+<style>
+    p {
+        font-size: 15px;
+    }
+</style>
+
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+
+    <title>Video INRs</title>
+
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1.">
+
+
+    <!--     <link rel="apple-touch-icon" href="apple-touch-icon.png"> -->
+    <link rel="icon" type="image/png" href="img/seal_icon.png">
+    <!-- Place favicon.ico in the root directory -->
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.8.0/codemirror.min.css">
+    <link rel="stylesheet" href="css/app.css">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-110862391-1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'UA-110862391-1');
+    </script>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.8.0/codemirror.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.5.3/clipboard.min.js"></script>
+
+    <script src="js/app.js"></script>
+</head>
+
+<body>
+    <div class="container" id="main">
+        <div class="row">
+            <h2 class="col-md-12 text-center">
+                How to Design and Train Your Implicit Neural Representation for Video Compression<br />
+                <small>
+                    Submission Under Review
+                </small>
+            </h2>
+        </div>
+        <div class="row">
+            <div class="col-md-12 text-center">
+                <ul class="list-inline">
+                    <li>
+                        <a href="https://mgwillia.github.io">
+                            Matt Gwilliam
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://www.linkedin.com/in/rz0605/">
+                            Roy Zhang
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://namithap10.github.io/">
+                            Namitha Padmanabhan
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://www.linkedin.com/in/hongyangdu/">
+                            Hongyang Du
+                        </a>
+                    </li>
+                    <li>
+                        <a href="http://www.cs.umd.edu/~abhinav/">
+                            Abhinav Shrivastava
+                        </a>
+                    </li>
+                </ul>
+                University of Maryland, College Park
+            </div>
+        </div>
+
+
+        <div class="row">
+            <div class="col-md-4 col-md-offset-4 text-center">
+                <ul class="nav nav-pills nav-justified">
+                    <li>
+                        <a href="https://arxiv.org/abs/2501.13107">
+                            <h4><strong>Paper</strong></h4>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+                <center>
+                    <image src="imgs/ilf_teaser.png" width="720px"></image>
+                </center> <br>
+                <h3>
+                    Abstract
+                </h3>
+                <p class="text-justify">
+                    Implicit neural representation (INR) methods for video compression have recently achieved visual quality and compression ratios that are competitive with traditional pipelines.
+                    However, due to the need for per-sample network training, the encoding speeds of these methods are too slow for practical adoption.
+                    We develop a library to allow us to disentangle and review the components of methods from the NeRV family, reframing their performance in terms of not only size-quality trade-offs, but also impacts on training time.
+                    We uncover principles for effective video INR design and propose a state-of-the-art configuration of these components, Rabbit NeRV (RNeRV).
+                    When all methods are given equal training time (equivalent to 300 NeRV epochs) for 7 different UVG videos at 1080p, RNeRV achieves +1.27% PSNR on average compared to the best-performing alternative for each video in our NeRV library.
+                    We then tackle the encoding speed issue head-on by investigating the viability of hyper-networks, which predict INR weights from video inputs, to disentangle training from encoding to allow for real-time encoding.
+                    We propose masking the weights of the predicted INR during training to allow for variable, higher quality compression, resulting in 1.7% improvements to both PSNR and MS-SSIM at 0.037 bpp on the UCF-101 dataset, and we increase hyper-network parameters by 0.4% for 2.5%/2.7% improvements to PSNR/MS-SSIM with equal bpp and similar speeds.
+                </p>
+            </div>
+        </div>
+
+
+
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+                <h3>
+                    Overview
+                </h3>
+                <center>
+                    <image src="imgs/overview_fig.png" width="720px"></image>
+                </center> <br>
+                <p class="text-justify">
+                    If you want to speed up your diffusion model, what you do might depend on the resources you have access to.
+                    If you don't want to or can't afford to train anything, you might opt for caching.
+                    By re-using intermediate diffusion outputs across time steps, you can save a lot of time, albeit at the expense of image quality.
+                    On the other hand, if you can afford to train, you will often use distillation to either train a model that is smaller (and therefore faster) or else a model that takes more aggressive denoising steps (and so requires less steps to generate a decent image).
+                    The drawback here is that you typically won't recover quite the same quality and aesthetics as the original model (which we refer to as "maximum" quality).
+
+                    On this webpage (see the paper for more!) we will describe the motivation for our feedback mechanism.
+                    We will explain how our feedback mechanism works.
+                    We will prove that it works well.
+                    And that's it! 
+                    The code is private, but feel free to email Matt and/or Zhiyu if you want to learn more.
+                </p>
+
+                <h3>
+                    Caching is not free lunch.
+                </h3>
+                <center>
+                    <image src="imgs/timestep_motivation.png" width="720px"></image>
+                </center> <br>
+                <p class="text-justify">
+                    Caching literature indicates that the features for a given block, for consecutive timesteps, are fairly similar.
+                    That is, if I take the first decoder block in a diffusion U-Net, its outputs at step 800 and step 750 are pretty similar.
+                    We find this tends to hold for diffusion transformers as well (the prior works are concerned mainly with U-Nets).
+                    However, we find that the makeup of the features changes a bit as well.
+                    In the plot above, we show, for each DiT block, the difference in the features at the given timestep compared to the first timestep, calculated by summing the elementwise differences.
+                    We show this for both a baseline (standard diffusion inference) and caching (every other step, re-use the latest result for the inner 14 blocks, from the 8th block to the 21st block).
+                    We normalize by dividing the values in both plots by their shared maximum.
+                    This reveals that caching causes the features to evolve differently, especially at earlier steps, where they don't change from the first features as quickly.
+                </p>
+
+                
+                <center>
+                    <image src="imgs/cache_motivation.png" width="720px"></image>
+                </center> <br>
+                <p class="text-justify">
+                    The fact that the intermediate features evolve differently is trivial; the more important question is whether they do not perform as well.
+                    We find that when we look closely, caching does in fact harm output quality.
+                    For these PixArt-alpha 512x512 images note the dramatic loss of details and identities for the left 2 samples, the blurriness in the next sample, and the artifacts in the rightmost sample.
+                    We hypothesize that we can rectify these issues by operating in the feature space itself.
+                    That is, we will introduce a module to attempt to predict what the baseline features would have been; still skipping the computation for the step, but without the drawbacks.
+                </p>
+
+                <h3>
+                    Feedback attempts to enable more powerful diffusion steps.
+                </h3>
+                <center>
+                    <image src="imgs/ilf_method.png" width="720px"></image>
+                </center> <br>
+                <p class="text-justify">
+                    Standard diffusion forwards attempt to predict the noise added at the given timestep.
+                    Our method essentially attempts to predict some future noise, or, rather, multiple steps worth of noise.
+                    This allows the diffusion process to proceed with the same quality, but in fewer steps.
+                    We do this by looping within the model: feeding the outputs of some block to a feedback module, which modifies the features before passing them to an earlier block to continue the model forward.
+                </p>
+
+                <center>
+                    <image src="imgs/ilf_vs_caching.png" width="480px"></image>
+                </center> <br>
+                <p class="text-justify">
+                    Compared to caching, we use features from the later blocks to modulate the computations of the earlier blocks.
+                    What we are doing is using the model's previous progress towards a noise prediction to inform its current progress towards a noise prediction.
+                    When trained correctly, this allows for noise predictions which result in images which more closely approximate, or even exceed, the quality of the original results.
+                </p>
+
+                <h3>
+                    ILF generates high quality images quickly.
+                </h3>
+                <center>
+                    <image src="imgs/zoom-sigma-extreme.png" width="720px"></image>
+                </center> <br>
+                <p class="text-justify">
+                    Notice the superior details of ILF compared to caching.
+                    With 1.7x speedup we can achieve similar results to the un-accelerated baseline for the 512x512 PixArt-sigma images!
+                </p>
+
+                <center>
+                    <image src="imgs/metrics.png" width="720px"></image>
+                </center> <br>
+                <p class="text-justify">
+                    Image generation metrics all have their shortcomings, but the majority of these numbers confirm ILF's efficacy.
+                </p>
+
+
+            </div>
+        </div>
+
+
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+                <h3>
+                    Citation
+                </h3>
+                <div class="form-group col-md-10 col-md-offset-1">
+                    <textarea id="bibtex" class="form-control" readonly rows="8">
+                        @misc{aggarwal2025evolutionarycachingaccelerateofftheshelf,
+                            title={Evolutionary Caching to Accelerate Your Off-the-Shelf Diffusion Model}, 
+                            author={Anirud Aggarwal and Abhinav Shrivastava and Matthew Gwilliam},
+                            year={2025},
+                            eprint={2506.15682},
+                            archivePrefix={arXiv},
+                            primaryClass={cs.CV},
+                            url={https://arxiv.org/abs/2506.15682}, 
+                        }
+                    </textarea>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+                <br> The website was based on the popular template from <a href="https://bmild.github.io">Ben
+                    Mildenhall</a>.
+                </p>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

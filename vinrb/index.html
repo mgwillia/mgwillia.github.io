@@ -92,8 +92,13 @@
             <div class="col-md-4 col-md-offset-4 text-center">
                 <ul class="nav nav-pills nav-justified">
                     <li>
-                        <a href="https://arxiv.org/abs/2501.13107">
+                        <a href="https://arxiv.org/abs/XXXX.XXXXX">
                             <h4><strong>Paper</strong></h4>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://github.com/mgwillia/vinrb">
+                            <h4><strong>Code</strong></h4>
                         </a>
                     </li>
                 </ul>
@@ -104,7 +109,7 @@
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
                 <center>
-                    <image src="imgs/ilf_teaser.png" width="720px"></image>
+                    <image src="imgs/vinrb_teaser.png" width="720px"></image>
                 </center> <br>
                 <h3>
                     Abstract
@@ -132,17 +137,19 @@
                     <image src="imgs/overview_fig.png" width="720px"></image>
                 </center> <br>
                 <p class="text-justify">
-                    If you want to speed up your diffusion model, what you do might depend on the resources you have access to.
-                    If you don't want to or can't afford to train anything, you might opt for caching.
-                    By re-using intermediate diffusion outputs across time steps, you can save a lot of time, albeit at the expense of image quality.
-                    On the other hand, if you can afford to train, you will often use distillation to either train a model that is smaller (and therefore faster) or else a model that takes more aggressive denoising steps (and so requires less steps to generate a decent image).
-                    The drawback here is that you typically won't recover quite the same quality and aesthetics as the original model (which we refer to as "maximum" quality).
+                    In the context of deep learning, you can train implicit neural networks relatively quickly.
+                    Since each network needs to fit to only a single image, or video, or scene, the networks are typically quite small, and the datasets only consistent of the corresponding set of coordinates.
+                    A state-of-the-art image INR might fit to an image for perfect reconstruction in a matter of seconds.
+                    These networks tend to handle spatial and temporal redundancy, such that they are good candidates for image and video compression.
 
-                    On this webpage (see the paper for more!) we will describe the motivation for our feedback mechanism.
-                    We will explain how our feedback mechanism works.
-                    We will prove that it works well.
-                    And that's it! 
-                    The code is private, but feel free to email Matt and/or Zhiyu if you want to learn more.
+                    However, if we change the context from deep learning to video compression, the overfitting process is suddenly prohibitively slow.
+                    Compressing a video at a rate of a few seconds per frame is unacceptable for nearly all applications.
+                    Unfortunately, the bulk of INR video compression literature focuses only on the quality-size tradeoff, to the point that these speeds, instead of getting better, are getting worse and worse with each new state-of-the-art.
+                    
+                    To remedy this, we propose a renewed focus on encoding speed.
+                    We disentangle video INR models into their core components, and revisit key design decisions in terms of how they impact quality, size, AND time.
+                    Rather than only measuring training epochs (which obfuscates the actual time cost of each iteration), we benchmark in terms of complexity and real-world latency.
+                    As a bonus, we also examine the extent to which these different mechanisms and principles, proposed concurrently across multiple papers, can work together for promising performance improvements.
                 </p>
 
                 <h3>
@@ -226,15 +233,7 @@
                 </h3>
                 <div class="form-group col-md-10 col-md-offset-1">
                     <textarea id="bibtex" class="form-control" readonly rows="8">
-                        @misc{aggarwal2025evolutionarycachingaccelerateofftheshelf,
-                            title={Evolutionary Caching to Accelerate Your Off-the-Shelf Diffusion Model}, 
-                            author={Anirud Aggarwal and Abhinav Shrivastava and Matthew Gwilliam},
-                            year={2025},
-                            eprint={2506.15682},
-                            archivePrefix={arXiv},
-                            primaryClass={cs.CV},
-                            url={https://arxiv.org/abs/2506.15682}, 
-                        }
+                        TODO
                     </textarea>
                 </div>
             </div>
